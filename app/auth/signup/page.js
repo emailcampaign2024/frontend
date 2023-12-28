@@ -20,7 +20,7 @@ const SignUp = () => {
     e.preventDefault();
   
     try {
-      const response = await axios.post('https://emailcampigns.adaptable.app/user/signup', {
+      const response = await axios.post('https://email-campaign-lnfx.onrender.com/user/signup', {
         firstName,
         lastName,
         email,

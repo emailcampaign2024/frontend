@@ -22,7 +22,7 @@ const EmailAccounts = () => {
   // },[])
 
   useEffect(() => {
-    axios.get("https://email-campaign.onrender.com/email/details").then((res) => {
+    axios.get("https://email-campaign-lnfx.onrender.com/email/details").then((res) => {
       setEmailAccountsData(res.data);
     });
   }, [emailAccountsData]);
