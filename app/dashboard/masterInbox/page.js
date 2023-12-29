@@ -10,7 +10,7 @@ const MasterInbox = () => {
 
 
   useEffect(() => {
-    axios.get("https://email-campaign-lnfx.onrender.com/email").then((res) => {
+    axios.get("https://email-campaign.onrender.com/email").then((res) => {
       setInboxData(res.data);
     });
   },[inboxData]);

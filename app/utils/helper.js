@@ -17,3 +17,9 @@ export const formatDate = (dateString) => {
     const finalFormat = `${formattedDate} at ${formattedTime}`;
     return finalFormat;
   };
+
+  export const validateEmail = (email) => {
+    // Simple email validation using regex
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };

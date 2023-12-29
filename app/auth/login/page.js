@@ -26,7 +26,7 @@ const Login = () => {
     e.preventDefault();
     
     try {
-      const response = await axios.post('https://email-campaign-lnfx.onrender.com/user/login', {
+      const response = await axios.post('https://email-campaign.onrender.com/user/login', {
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
