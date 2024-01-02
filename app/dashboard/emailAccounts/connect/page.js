@@ -29,7 +29,7 @@ const ConnectAccount = () => {
       return ;
     }
 
-    axios.post('https://email-campaign.onrender.com/email/add-user', {email, password})
+    axios.post('https://email-campaign-lnfx.onrender.com/email/add-user', {email, password})
     .then((response)=> {
       console.log('Post request successful :', response.data) 
       router.push('/dashboard/emailAccounts')
