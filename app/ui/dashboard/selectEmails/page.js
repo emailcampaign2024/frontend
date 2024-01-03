@@ -44,7 +44,7 @@ const SelectEmails = ({selectedValues , setSelectedValues , options }) => {
         isOpen ? setIsOpen(false) : setIsOpen(true)
       }}>Select Email IDs</button>
       {isOpen ? (
-        <div className="w-[700px] h-auto bg-gray-100 shadow-md top-20 absolute">
+        <div className="w-[700px] h-[400px] overflow-scroll bg-gray-100 shadow-md top-20 absolute">
           <div className="cursor-pointer py-1 px-4 border-b border-borderColor flex items-center">
             <input
               id='checkBox'

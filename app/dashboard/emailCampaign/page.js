@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
 
 import SaveTemplate from "@/app/ui/dashboard/saveTemplate/saveTemplate";
 import DashboardHeader from "@/app/ui/dashboard/dashboardHeader/page";
@@ -75,7 +76,7 @@ const EmailCampaign = () => {
       });
 
       if (response.ok) {
-        alert("email sent successfully");
+        toast.success("Email sent successfully");
         setSelectedEmailValues([])
         setSubject('')
         setBody('')
@@ -160,6 +161,7 @@ const EmailCampaign = () => {
           </div>
         </div>
       </form>
+      <Toaster />
     </div>
   );
 };

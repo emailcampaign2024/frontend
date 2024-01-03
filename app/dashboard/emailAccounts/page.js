@@ -4,7 +4,6 @@ import Link from 'next/link'
 import axios from 'axios'
 import CheckBox from "@mui/material/Checkbox";
 
-// import { emailAccountsData } from '@/constants';
 import DashboardHeader from '@/app/ui/dashboard/dashboardHeader/page'
 import EmailAccountCard from '@/app/ui/dashboard/emailAccountCard/page'
 import EmailCardShimmer from '@/app/ui/dashboard/shimmer/page';
@@ -14,11 +13,13 @@ const EmailAccounts = () => {
   const [selectedAccounts, setSelectedAccounts] = useState([]);
   const [selectAllChecked, setSelectAllChecked] = useState(false);
 
+
   useEffect(() => {
     axios.get("https://email-campaign.onrender.com/email/details").then((res) => {
       setEmailAccountsData(res.data);
+      console.log(res.data)
     });
-  }, [emailAccountsData]);
+  }, []);
 
  
   const handleAddNew = () => {
@@ -62,14 +63,16 @@ const EmailAccounts = () => {
           <CheckBox onChange={handleSelectAll} checked={selectAllChecked} />
           <p>NAME</p>
         </div>
-        <div className='flex items-center justify-between min-w-[20%]'>
-          <p>EMAIL SENT</p>
-          <p className='-mr-12'>WARMUP EMAIL SENT</p>
+        <div className='flex-1 flex items-center justify-between min-w-[20%]'>
+          <p>BOUNCE EMAIL</p>
+          <p className=''>WARMUP EMAIL SENT</p>
+          <p>SEEN</p>
+          <p className='ml-12'>UNSEEN</p>
         </div>
-        <div className='flex items-center justify-end space-x-8 min-w-[30%]'>{""}</div>
+        <div className='flex items-center justify-end space-x-8 min-w-[29%]'>{""}</div>
       </header>
         {emailAccountsData ? emailAccountsData.map((item) => {
-          return <EmailAccountCard key={item.emailAddress} {...item} isSelected={selectedAccounts.includes(item.emailAddress)} handleCardSelection={handleCardSelection} />
+          return <EmailAccountCard key={item.id} {...item} isSelected={selectedAccounts.includes(item.emailAddress)} handleCardSelection={handleCardSelection} />
         }): <EmailCardShimmer />}
       </div>
     </div>
