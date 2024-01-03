@@ -8,7 +8,7 @@ const GlobalAnalytics = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("https://email-campaign.onrender.com/user/users-data")
+    fetch("https://email-campaign-lnfx.onrender.com/user/users-data")
       .then((response) => response.json())
       .then((result) => setData(result))
       .catch((error) => console.error("Error fetching data:", error));

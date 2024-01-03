@@ -67,7 +67,7 @@ const EmailCampaign = () => {
     };
 
     try {
-      const response = await fetch("https://email-campaign.onrender.com/email/send-email", {
+      const response = await fetch("https://email-campaign-lnfx.onrender.com/email/send-email", {
         method: "POST",
         headers: {
           "content-type": "application/json",
