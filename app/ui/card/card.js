@@ -4,9 +4,9 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import EmailIcon from "@mui/icons-material/Email";
 
-const WarmupAnalyticsCard = ({heading ,subHeading,  count, scheduledCount, emailCount, onViewDetails }) => {
+const WarmupAnalyticsCard = ({heading ,subHeading,  count, scheduledCount, emailCount, onViewDetails,bgColor='fadedBg',shadow='lg' }) => {
   return (
-    <Card className="shadow-lg bg-fadedBg">
+    <Card className={`shadow-${shadow} bg-${bgColor}`}>
       <CardContent className="relative p-0">
         <Typography variant="h6" gutterBottom className="px-4 pt-2">
           {heading}

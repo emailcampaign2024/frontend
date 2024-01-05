@@ -34,9 +34,7 @@ const Login = () => {
         email,
         password,
       });
-      console.log("first");
       if (response.data.token) {
-        console.log("22222222");
         const token = response.data.token;
         localStorage.clear();
         setAuthToken(token)
@@ -47,14 +45,12 @@ const Login = () => {
           router.push('/dashboard');
         }, 1000);
       } else {
-        console.log("33333");
         toast.error('Login failed: Invalid user or password'); 
         setEmail('');
         setPassword('');
         setIsLoginError(true)
       }
     } catch (error) {
-      console.log("44444");
       toast.error('Uh-oh! Incorrect credentials. Retry!');
       setIsLoginError(true)
       setEmail('');
@@ -79,7 +75,7 @@ const Login = () => {
         <form className="mt-8 space-y-6 " onSubmit={handleLogin}>
         <div className="rounded-md shadow-sm space-y-3">
             <div>
-              <label htmlFor="email" className="sr-only">Email address</label>
+              <label htmlFor="email" className="sr-only">Email Address</label>
               <input
                 id="email"
                 name="email"
@@ -111,7 +107,7 @@ const Login = () => {
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-md font-medium rounded-md text-white bg-primary hover:bg-secondary"
             >
-              Log In
+              Login
             </button>
             <Toaster />
           </div>
@@ -120,7 +116,7 @@ const Login = () => {
           Don&apos;t have an account?{' '}
           <span className="text-secondary hover:underline">
             {' '}
-            <Link href={'/auth/signup'}>Sign up</Link>{' '}
+            <Link href={'/auth/signup'}>Sign Up</Link>{' '}
           </span>
         </p>
       </div>
