@@ -23,9 +23,9 @@ const Layout = ({children}) => {
         <div>
             <NavbarComponent handleSideBar={setShowSideBar} isOpen={showSideBar} />
         </div>
-        <div className='w-full h-[90vh] flex'>
+        <div className='w-full min-h-[90vh]  flex'>
             <SidebarComponent handleSideBar={showSideBar} />
-            <div className={showSideBar ? `min-w-[1300px]` : `w-full`}>{children}</div>
+            <div className={showSideBar ? `min-w-[1300px] ml-[14.4rem]` : `w-full ml-14`}>{children}</div>
         </div>
     </div>
   )

@@ -8,7 +8,7 @@ import DashboardHeader from "@/app/ui/dashboard/dashboardHeader/page";
 import PrimaryButton from "@/app/ui/primaryButton/page";
 import SelectEmails from "@/app/ui/dashboard/selectEmails/page";
 
-const EmailCampaign = () => {
+const ComposeEmail = () => {
   const [selectedEmailValues, setSelectedEmailValues] = useState([]);
   const [emailOptions , SetEmailOptions] = useState([])
   const [subject, setSubject] = useState("");
@@ -30,7 +30,7 @@ const EmailCampaign = () => {
 
     
 
-  }, [showModal]);
+  }, [showModal, templates]);
 
   const handleSelectTemplate = (template) => {
     setSelectedTemplate(template);
@@ -166,4 +166,4 @@ const EmailCampaign = () => {
   );
 };
 
-export default EmailCampaign;
+export default ComposeEmail;
