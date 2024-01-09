@@ -4,21 +4,25 @@ import Link from 'next/link'
 import axios from 'axios'
 import CheckBox from "@mui/material/Checkbox";
 
-// import { emailAccountsData } from '@/constants';
 import DashboardHeader from '@/app/ui/dashboard/dashboardHeader/page'
 import EmailAccountCard from '@/app/ui/dashboard/emailAccountCard/page'
 import EmailCardShimmer from '@/app/ui/dashboard/shimmer/page';
+import WarmupAnalyticsCard from '@/app/ui/card/card';
+import { backendBaseUrl } from '@/constants';
 
 const EmailAccounts = () => {
+  const [isLoading , setIsLoading] = useState(true)
   const [emailAccountsData , setEmailAccountsData] = useState([])
   const [selectedAccounts, setSelectedAccounts] = useState([]);
   const [selectAllChecked, setSelectAllChecked] = useState(false);
 
+
   useEffect(() => {
-    axios.get("https://email-campaign-lnfx.onrender.com/email/details").then((res) => {
+    axios.get(`${backendBaseUrl}/email/details`).then((res) => {
       setEmailAccountsData(res.data);
+        setIsLoading(false)
     });
-  }, [emailAccountsData]);
+  }, []);
 
  
   const handleAddNew = () => {
@@ -48,29 +52,42 @@ const EmailAccounts = () => {
 
 
 
-  return (
-    <div className='w-full'>
+  return(
+    <div className='w-full space-y-8 '>
       <DashboardHeader heading={'Email Accounts'} />
-      <div className='float-right px-6 py-4 my-2'>
+      <div className='w-full flex justify-end px-6  my-2 '>
         <Link href={'/dashboard/emailAccounts/connect'}>
         <button type='button' className='rounded-lg px-4 py-2 bg-primary hover:bg-primaryDark text-white' onClick={handleAddNew}>+ Add new</button></Link>
       </div>
-      
-      <div className='w-full flex flex-col space-y-4'>
+      <div className='flex  justify-around mx-6'>
+        <WarmupAnalyticsCard heading={'Total Emails Listed'} count={84} bgColor='bg-blue-50' shadow='shadow-xl' />
+        <WarmupAnalyticsCard heading={'Total Emails Sent'} count={258} bgColor='bg-blue-50' shadow='shadow-xl' />
+        <WarmupAnalyticsCard heading={'Total Bounced Emails '} count={12} bgColor='bg-blue-50' shadow='shadow-xl' />
+        <WarmupAnalyticsCard heading={'Total Bounced Emails '} count={12} bgColor='bg-blue-50' shadow='shadow-xl' />
+      </div>
+      <div className='w-full flex flex-col'>
       <header className="flex justify-between items-center px-8 py-2 mx-4  text-xs font-semibold  text-textSoft">
         <div className='flex gap-3 items-center min-w-[30%]'>
           <CheckBox onChange={handleSelectAll} checked={selectAllChecked} />
           <p>NAME</p>
         </div>
-        <div className='flex items-center justify-between min-w-[20%]'>
-          <p>EMAIL SENT</p>
-          <p className='-mr-12'>WARMUP EMAIL SENT</p>
+        <div className='flex-1 flex items-center justify-between min-w-[20%]'>
+          <p>BOUNCE EMAIL</p>
+          <p className=''>WARMUP EMAIL SENT</p>
+          <p>OPENED</p>
+          <p className='ml-12'>UNREAD</p>
         </div>
-        <div className='flex items-center justify-end space-x-8 min-w-[30%]'>{""}</div>
+        <div className='flex items-center justify-end space-x-8 min-w-[29%]'>{""}</div>
       </header>
-        {emailAccountsData ? emailAccountsData.map((item) => {
-          return <EmailAccountCard key={item.emailAddress} {...item} isSelected={selectedAccounts.includes(item.emailAddress)} handleCardSelection={handleCardSelection} />
-        }): <EmailCardShimmer />}
+      {isLoading ? (
+          Array.from({ length: 2 }).map((_, index) => (
+            <EmailCardShimmer key={index} />
+          ))
+        ) : (
+          emailAccountsData.map((item) => (
+            <EmailAccountCard key={item.id} {...item} isSelected={selectedAccounts.includes(item.emailAddress)} handleCardSelection={handleCardSelection}/>
+          ))
+        )}
       </div>
     </div>
   )

@@ -8,7 +8,7 @@ import BootstrapTooltip from '../../tooltip/page';
 const SidebarComponent = ({handleSideBar}) => {
 
   return (
-    <div className={`h-full ${handleSideBar ? 'min-w-[230px]' : 'w-auto'} shadow-md text-textDark border-r-borderColor border-r `}>
+    <div className={`h-[90vh]  ${handleSideBar ? 'min-w-[230px]' : 'w-fit'} shadow-md z-10 bg-white text-textDark border-r-borderColor border-r `}>
       <ul>
         {sideBarData.map((item) => {
           return handleSideBar ? (

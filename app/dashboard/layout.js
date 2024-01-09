@@ -19,13 +19,13 @@ const Layout = ({children}) => {
 
 
   return (
-    <div className='flex-col overflow-hidden h-full'>
+    <div className='flex-col  h-full'>
         <div>
             <NavbarComponent handleSideBar={setShowSideBar} isOpen={showSideBar} />
         </div>
-        <div className='w-full h-[90vh] flex'>
+        <div className='w-full min-h-[90vh]  flex'>
             <SidebarComponent handleSideBar={showSideBar} />
-            <div className={showSideBar ? `min-w-[1300px]` : `w-full`}>{children}</div>
+            <div className={showSideBar ? `min-w-[1300px] ` : `w-full `}>{children}</div>
         </div>
     </div>
   )
