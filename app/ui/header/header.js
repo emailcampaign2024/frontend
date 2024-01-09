@@ -31,7 +31,7 @@ const Header = () => {
           </li>
         </ul>
         <div className="space-x-6 font-semibold text-secondary">
-        <Link href="/auth/login" className="px-4 py-2 rounded-md  hover:bg-fadedBg" >Sign In</Link>
+        <Link href="/auth/login" className="px-4 py-2 rounded-md  hover:bg-fadedBg" >Sign in</Link>
         <button className='bg-[#61f9cb] hover:bg-[#50caa5] px-4 py-2 rounded-md font-semibold text-[#6a6a6a] hover:text-[#f7f7f7]'>Get Started For Free</button>
         </div>
       </header>

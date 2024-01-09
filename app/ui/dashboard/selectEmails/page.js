@@ -29,7 +29,7 @@ const SelectEmails = ({selectedValues , setSelectedValues , options }) => {
 
     if(document.getElementById('checkBox').checked){
       const selectAllValues = [] ;
-        options.map((option) => selectAllValues.push(option))
+        options.map((option) => selectAllValues.push(option.value))
         setSelectedValues(selectAllValues)
       }else{
         setSelectedValues([])
@@ -44,8 +44,7 @@ const SelectEmails = ({selectedValues , setSelectedValues , options }) => {
         isOpen ? setIsOpen(false) : setIsOpen(true)
       }}>Select Email IDs</button>
       {isOpen ? (
-        <div className="w-[700px] h-[340px] overflow-y-scroll bg-gray-100 shadow-md top-20 absolute">
-            <button type='button' className=' py-3 my2 bg-gray-300 hover:bg-gray-400 w-full  text-sm' onClick={handleConfirmEmails} >Confirm</button>
+        <div className="w-[700px] h-auto bg-gray-100 shadow-md top-20 absolute">
           <div className="cursor-pointer py-1 px-4 border-b border-borderColor flex items-center">
             <input
               id='checkBox'
@@ -59,18 +58,19 @@ const SelectEmails = ({selectedValues , setSelectedValues , options }) => {
             <label htmlFor='selectAll'>Select all</label>
           </div>
         {options.map((option) => (
-          <div key={option}  className="cursor-pointer py-1 px-4 border-b border-borderColor flex items-center">
+          <div key={option.value}  className="cursor-pointer py-1 px-4 border-b border-borderColor flex items-center">
             <input
               id='checkBox'
               type="checkbox"
-              value={option}
-              checked={selectedValues.includes(option)}
-              onChange={() => handleCheckboxChange(option)}
+              value={option.value}
+              checked={selectedValues.includes(option.value)}
+              onChange={() => handleCheckboxChange(option.value)}
               className='m-2'
             />
-            <label htmlFor={option}>{option}</label>
+            <label htmlFor={option.value}>{option.label}</label>
           </div>
         ))}
+        <button type='button' className='px-4 py-2 bg-gray-300 float-right m-2 rounded-md text-sm' onClick={handleConfirmEmails} >Confirm</button>
       </div>
       ) : null}
       <div className='w-full flex gap-2 px-2 border border-borderColor rounded-md items-center overflow-hidden'>

@@ -72,7 +72,7 @@ const SignUp = () => {
             <div className='flex justify-between gap-2'>
             <input
               type='text'
-              placeholder='First Name'
+              placeholder='first name'
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               className='w-full py-2 mb-4 px-2 focus:ring-secondary focus:border-secondary focus:outline-none border border-borderColor rounded-md'
@@ -80,7 +80,7 @@ const SignUp = () => {
             />
             <input
               type='text'
-              placeholder='Last Name'
+              placeholder='last name'
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               className='w-full py-2 mb-4 px-2 focus:ring-secondary focus:border-secondary focus:outline-none border border-borderColor rounded-md'
@@ -89,7 +89,7 @@ const SignUp = () => {
             </div>
             <input
               type='email'
-              placeholder='Email Address'
+              placeholder='Email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className='w-full py-2 mb-4 px-2 focus:ring-secondary focus:border-secondary focus:outline-none   border border-borderColor rounded-md'
