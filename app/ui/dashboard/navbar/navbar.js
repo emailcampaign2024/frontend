@@ -75,11 +75,12 @@ const NavbarComponent = ({ handleSideBar, isOpen }) => {
               aria-expanded={anchorEl ? "true" : undefined}
               onClick={handleClick}
               sx={{
-                padding: "0px",
+                padding: "2px",
                 fontSize: "16px",
                 textTransform: "capitalize",
                 fontWeight: 400,
-                color:'black'
+                color:'black',
+                minWidth:'100px'
               }}
             >
               {localStorageUser}

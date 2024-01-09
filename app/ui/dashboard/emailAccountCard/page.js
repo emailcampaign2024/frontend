@@ -34,7 +34,7 @@ const EmailAccountCard = ({
   const open = Boolean(anchorEl);
   const route = useRouter();
 
-  const options = ["Reconnect Account", "Remove Account"];
+  const options = ["Remove Account"];
 
   const handleCheckboxChange = async (e) => {
     handleCardSelection(emailAddress);
@@ -79,14 +79,14 @@ const EmailAccountCard = ({
 
   return(
     <div className="flex justify-between items-center px-8 h-16 mx-4 font-semibold text-sm  rounded-lg email-account-card-shadow border border-gray-100 cursor-pointer">
-      <div className="flex items-center min-w-[30%] " onClick={openDrawer}>
+      <div className="flex items-center min-w-[30%] " >
         <CheckBox
           checked={isSelected}
           value={emailAddress}
           onChange={handleCheckboxChange}
           sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
         />
-        <p className="px-2">{emailAddress}</p>
+        <p className="px-2 hover:text-primary  h-16 pt-5" onClick={openDrawer}>{emailAddress}</p>
       </div>
       <div
         className="flex flex-1 items-center justify-between  min-w-[20%] h-full"
@@ -157,22 +157,22 @@ const EmailAccountCard = ({
             <WarmupAnalyticsCard
               heading={"Bounce Email"}
               count={warmupEmailSent}
-              bgColor="blue-50"
+              bgColor="bg-blue-50"
             />
             <WarmupAnalyticsCard
               heading={"warmup Email Sent"}
               count={emailSent}
-              bgColor="blue-50"
+              bgColor="bg-blue-50"
             />
             <WarmupAnalyticsCard
               heading={"Opened"}
               count={Seen}
-              bgColor="blue-50"
+              bgColor="bg-blue-50"
             />
             <WarmupAnalyticsCard
               heading={"Unread"}
               count={Unseen}
-              bgColor="blue-50"
+              bgColor="bg-blue-50"
             />
           </div>
           <hr className="mt-[40px]" />

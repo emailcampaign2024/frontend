@@ -2,11 +2,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 import SaveTemplate from "@/app/ui/dashboard/saveTemplate/saveTemplate";
 import DashboardHeader from "@/app/ui/dashboard/dashboardHeader/page";
 import PrimaryButton from "@/app/ui/primaryButton/page";
 import SelectEmails from "@/app/ui/dashboard/selectEmails/page";
+import { backendBaseUrl } from "@/constants";
+import { ContentState, EditorState } from "draft-js";
 
 const ComposeEmail = () => {
   const [selectedEmailValues, setSelectedEmailValues] = useState([]);
@@ -16,16 +20,19 @@ const ComposeEmail = () => {
   const [templates, setTemplates] = useState(null);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [editorState, setEditorState] = useState(() => EditorState.createEmpty());
+ 
 
 
 
   useEffect(() => {
-    axios.get("https://email-campaign.onrender.com/templates").then((res) => {
+    axios.get(`${backendBaseUrl}/templates`).then((res) => {
       setTemplates(res.data);
     });
 
-    axios.get("https://email-campaign.onrender.com/emailLists").then((res) => {
-      SetEmailOptions(res.data);
+    axios.get(`${backendBaseUrl}/csv/data`).then((res) => {
+      const Emails = res.data.records.map((item) => item.email)
+      SetEmailOptions(Emails)
     });
 
     
@@ -37,7 +44,10 @@ const ComposeEmail = () => {
 
     if (template) {
       setSubject(template.subject || "");
-      setBody(template.description || "");
+      const newEditorState = EditorState.createWithContent(
+        ContentState.createFromText(template.description || "")
+      );
+      setEditorState(newEditorState);
     }
   };
 
@@ -47,7 +57,7 @@ const ComposeEmail = () => {
 
   const handleSaveTemplateData = ({ name, subject, description }) => {
     axios
-      .post("https://email-campaign.onrender.com/templates/create", {
+      .post(`${backendBaseUrl}/templates/create`, {
         name: name,
         subject: subject,
         description: description,
@@ -67,7 +77,7 @@ const ComposeEmail = () => {
     };
 
     try {
-      const response = await fetch("https://email-campaign-lnfx.onrender.com/email/send-email", {
+      const response = await fetch(`${backendBaseUrl}/email/send-email`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -89,9 +99,8 @@ const ComposeEmail = () => {
   };
 
   return (
-    <div className="min-w-[88%] h-full m-auto  space-y-6">
-      <DashboardHeader heading={"Compose Email"} />
-      <form onSubmit={handleSubmit} className="w-full space-y-10 relative px-16 py-6 solid">
+    <div className="w-full m-auto h-[60vh] rounded-md my-4">
+      <form onSubmit={handleSubmit} className="w-full space-y-5 relative px-16 py-6 solid">
         <div className="w-full  flex justify-between items-center">
           <SelectEmails selectedValues={selectedEmailValues} setSelectedValues={setSelectedEmailValues} options={emailOptions} />
         </div>
@@ -106,16 +115,42 @@ const ComposeEmail = () => {
             className="w-full py-4 px-2 rounded-md  outline-blue-200 border border-gray-200"
           />
         </div>
-        <div>
-          <textarea
-            id="body"
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            required
-            placeholder="Description"
-            className="w-full h-52 py-4 px-2 rounded-md  outline-blue-200 border border-gray-200"
-          />
-        </div>
+        <div style={{ border: '1px solid #ccc', padding: '10px',height:'200px', borderRadius: '5px' }}>
+      <Editor
+        editorState={editorState}
+        onEditorStateChange={setEditorState} 
+        toolbar={{
+          options: ['inline',  'list', 'textAlign', 'history'],
+          inline: {
+            options: ['bold', 'italic', 'underline', 'strikethrough', 'monospace', 'superscript', 'subscript'],
+          },
+          blockType: {
+            options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'Blockquote'],
+          },
+          fontSize: {
+            options: [8, 9, 10, 11, 12, 14, 18, 24, 30, 36],
+          },
+          fontFamily: {
+            options: ['Arial', 'Georgia', 'Impact', 'Tahoma', 'Times New Roman', 'Verdana'],
+          },
+          list: {
+            options: ['unordered', 'ordered'],
+          },
+          textAlign: {
+            options: ['left', 'center', 'right', 'justify'],
+          },
+          link: {
+            options: ['link'],
+          },
+          emoji: {
+            options: ['emoji'],
+          },
+          history: {
+            options: ['undo', 'redo'],
+          },
+        }}
+      />
+    </div>
         <div>
           <label htmlFor="template" className="text-lg text-textDark  mr-4">
             Select Template:

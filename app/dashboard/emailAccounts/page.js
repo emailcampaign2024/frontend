@@ -8,6 +8,7 @@ import DashboardHeader from '@/app/ui/dashboard/dashboardHeader/page'
 import EmailAccountCard from '@/app/ui/dashboard/emailAccountCard/page'
 import EmailCardShimmer from '@/app/ui/dashboard/shimmer/page';
 import WarmupAnalyticsCard from '@/app/ui/card/card';
+import { backendBaseUrl } from '@/constants';
 
 const EmailAccounts = () => {
   const [isLoading , setIsLoading] = useState(true)
@@ -17,7 +18,7 @@ const EmailAccounts = () => {
 
 
   useEffect(() => {
-    axios.get('https://email-campaign.onrender.com/email/details').then((res) => {
+    axios.get(`${backendBaseUrl}/email/details`).then((res) => {
       setEmailAccountsData(res.data);
         setIsLoading(false)
     });
@@ -59,10 +60,10 @@ const EmailAccounts = () => {
         <button type='button' className='rounded-lg px-4 py-2 bg-primary hover:bg-primaryDark text-white' onClick={handleAddNew}>+ Add new</button></Link>
       </div>
       <div className='flex  justify-around mx-6'>
-        <WarmupAnalyticsCard heading={'Total Emails Listed'} count={84} bgColor='blue-50' />
-        <WarmupAnalyticsCard heading={'Total Emails Sent'} count={258} bgColor='blue-50' />
-        <WarmupAnalyticsCard heading={'Total Bounced Emails '} count={12} bgColor='blue-50'  />
-        <WarmupAnalyticsCard heading={'Total Bounced Emails '} count={12} bgColor='blue-50'  />
+        <WarmupAnalyticsCard heading={'Total Emails Listed'} count={84} bgColor='bg-blue-50' shadow='shadow-xl' />
+        <WarmupAnalyticsCard heading={'Total Emails Sent'} count={258} bgColor='bg-blue-50' shadow='shadow-xl' />
+        <WarmupAnalyticsCard heading={'Total Bounced Emails '} count={12} bgColor='bg-blue-50' shadow='shadow-xl' />
+        <WarmupAnalyticsCard heading={'Total Bounced Emails '} count={12} bgColor='bg-blue-50' shadow='shadow-xl' />
       </div>
       <div className='w-full flex flex-col'>
       <header className="flex justify-between items-center px-8 py-2 mx-4  text-xs font-semibold  text-textSoft">
